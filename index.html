@@ -1,93 +1,209 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Uploady - file upload api</title>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+  <div class="container">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Uploady-api-example by uploady</title>
-  </head>
-
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Uploady-api-example</h1>
-        <h2>File storage via uploady api</h2>
-        <a href="https://github.com/uploady/uploady-api-example" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/uploady/uploady-api-example/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/uploady/uploady-api-example/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/uploady/uploady-api-example"></a> is maintained by <a href="https://github.com/uploady">uploady</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+    <div class="jumbotron">
+      <h1>Uploady file upload api example</h1>
+      <p>How to get started:</p>
+      <ol>
+        <li>Create new app at <a href="http://www.uploady.com/#!/developers/apps">http://www.uploady.com/#!/developers/apps</a></li>
+        <li>Generate static access token while creating it.</li>
+        <li>Add your url to "Allowed origins" (if you are running from localhost, add: "http://localhost")</li>
+      </ol>
+      <p>For this demo, we can use example app with generated static access token <code>Mj_FWB_4DfocQLIB-wjUx_tmhKaeIF_tn3bfIB5WmWksxzczXDznQpW69</code></p>
+      <p>
+        <a href="http://www.uploady.com/v1/docs" class="btn btn-primary btn-lg" role="button" target="_blank">Docs</a>
+        <a href="https://github.com/uploady/uploady-api-example" class="btn btn-default btn-lg" role="button">Source code</a>
+      </p>
     </div>
 
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-awdawdawd");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+    <form id="upload" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>Access token</label>
+        <input type="text" class="form-control" name="access_token" value="Mj_FWB_4DfocQLIB-wjUx_tmhKaeIF_tn3bfIB5WmWksxzczXDznQpW69"/>
+      </div>
 
-  </body>
+      <div class="form-group">
+        <label>File</label>
+        <input type="file" name="file" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-primary">
+        <a onclick="loadFileList()" class="btn btn-default">Load file list</a>
+      </div>
+    </form>
+
+    <h2>Server response</h2>
+    <textarea id="log" class="form-control" rows="3">
+      No request - no response
+    </textarea>
+
+    <h2>Uploaded files</h2>
+    <ol id="files"></ol>
+  </div>
+
+  <script>
+    var files = [];
+    var domain = '//www.uploady.com';
+    var uploadDomain = '//content.uploady.com';
+    var $form = $('#upload');
+    var $accessToken = $form.find('[name=access_token]');
+    var $file = $form.find('[name=file]');
+
+    $form.submit(function (e) {
+      e.preventDefault();
+      uploadFile();
+    });
+    loadFileList();
+
+    function uploadFile() {
+      var uploadUrl = uploadDomain + '/v1/api/upload';
+      var data = new FormData();
+      if ($file[0].files.length > 0) {
+        var file = $file[0].files[0];
+        data.append('file', file, file.name);
+      }
+      var request = $.ajax({
+        type: "POST",
+        url: uploadUrl,
+        headers: {
+          // Note: access token is not allowed to be sent in form data
+          'Authorization': 'Bearer ' + $accessToken.val()
+        },
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        data: data
+      });
+      request.done(function(data) {
+        $("#log").val(JSON.stringify(data));
+        pushFile(data.files[0]);
+        updateFilesList();
+      });
+      request.fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+        console.log(jqXHR);
+        $("#log").val(jqXHR.responseText);
+      });
+    }
+
+    function shareFile(link) {
+      if (link.hasAttribute('href')) {
+        return ;
+      }
+      var request = $.ajax({
+        type: "PUT",
+        url: domain + '/v1/api/files',
+        headers: {
+          'Authorization': 'Bearer ' + $accessToken.val()
+        },
+        dataType: 'json',
+        data: {
+          'id': link.parentNode.id,
+          'share_link_enabled': true
+        }
+      });
+      request.done(function(data) {
+        $("#log").val(JSON.stringify(data));
+        pushFile(data.files[0]);
+        updateFilesList();
+      });
+    }
+
+    function loadUserInfo() {
+      var request = $.ajax({
+        type: "GET",
+        url: domain + '/v1/api/users?access_token=' + $accessToken.val(),
+        dataType: 'json'
+      });
+      request.done(function(data) {
+        $("#log").val(JSON.stringify(data));
+      });
+      return request;
+    }
+
+    function loadFileList() {
+      loadUserInfo().then(function (data) {
+        var request = $.ajax({
+          type: "GET",
+          url: domain + '/v1/api/folders/children?access_token=' + $accessToken.val() + '&get_files=1&id=' + data.users[0].links.root_folder,
+          dataType: 'json'
+        });
+        request.done(function(data) {
+          $("#log").val(JSON.stringify(data));
+          files.length = 0;//empty current file list
+          $.each(data.files, function (key, file) {
+            pushFile(file);
+          });
+          updateFilesList();
+        });
+      });
+    }
+
+    function deleteFile(link) {
+      var request = $.ajax({
+        type: 'DELETE',
+        url: domain + '/v1/api/files',
+        dataType: 'json',
+        headers: {
+          'Authorization': 'Bearer ' + $accessToken.val()
+        },
+        data: {
+          'id': link.parentNode.id
+        }
+      });
+      request.done(function(data) {
+        $("#log").val(JSON.stringify(data));
+        loadFileList();
+      });
+    }
+
+    function pushFile(file) {
+      for (var i = 0; i < files.length; i++) {
+        if (files[i].id == file.id) {
+          $.extend(files[i], file);
+          return ;
+        }
+      }
+      files.push(file);
+    }
+
+    function updateFilesList() {
+      $("#files").empty();
+      $.each(files, function (key, file) {
+        var $dom = $('<li id="' + file.id + '" ></li>');
+        $dom.append($('<a class="btn btn-xs btn-danger" onclick="deleteFile(this)">Delete file</a>'));
+        if (file.share_link_enabled) {
+          $dom.append($('<a target="_blank" href="' + file.share_url +
+          '"> ' +
+            file.name + ' - ' + file.share_url +
+          '</a>'));
+        } else {
+          $dom.append($('<a onclick="shareFile(this)">' +
+            file.name + ' - Click to share' +
+          '</a>'));
+        }
+        $("#files").append($dom);
+      });
+    }
+
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-37289958-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
 </html>

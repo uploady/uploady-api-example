@@ -1,0 +1,1 @@
+[http://uploady.github.io/uploady-api-example/](http://uploady.github.io/uploady-api-example/)
