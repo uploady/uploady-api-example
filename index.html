@@ -4,12 +4,21 @@
   <meta charset="UTF-8">
   <title>Uploady - file upload api</title>
   <script src="bower_components/jquery/jquery.js"></script>
+  <script src="js/resetelement.js"></script>
+  <script src="js/loader.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+  <div id="loading">
+    <div class="spinner">
+      <div class="cube1"></div>
+      <div class="cube2"></div>
+    </div>
+  </div>
   <div class="container">
 
-    <div class="jumbotron">
+    <div class="jumbotron page-header">
       <h1>Uploady file upload api example</h1>
       <p>How to get started:</p>
       <ol>
@@ -27,12 +36,12 @@
     <form id="upload" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label>Access token</label>
-        <input type="text" class="form-control" name="access_token" value="Mj_FWB_4DfocQLIB-wjUx_tmhKaeIF_tn3bfIB5WmWksxzczXDznQpW69"/>
+        <input type="text" class="form-control" name="access_token" value="Mj_FWB_4DfocQLIB-wjUx_tmhKaeIF_tn3bfIB5WmWksxzczXDznQpW69" required/>
       </div>
 
       <div class="form-group">
         <label>File</label>
-        <input type="file" name="file" class="form-control"/>
+        <input type="file" name="file" class="form-control" required/>
       </div>
 
       <div class="form-group">
@@ -47,13 +56,18 @@
     </textarea>
 
     <h2>Uploaded files</h2>
-    <ol id="files"></ol>
+    <table id="files" class="table">
+      <thead>
+        <tr><th>Name</th><th>Actions</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
 
   <script>
     var files = [];
-    var domain = '//www.uploady.com';
-    var uploadDomain = '//content.uploady.com';
+    var domain = 'https://www.uploady.com';
+    var uploadDomain = 'https://content.uploady.com';
     var $form = $('#upload');
     var $accessToken = $form.find('[name=access_token]');
     var $file = $form.find('[name=file]');
@@ -71,6 +85,7 @@
         var file = $file[0].files[0];
         data.append('file', file, file.name);
       }
+      $file.myResetElement();
       var request = $.ajax({
         type: "POST",
         url: uploadUrl,
@@ -107,7 +122,7 @@
         },
         dataType: 'json',
         data: {
-          'id': link.parentNode.id,
+          'id': link.parentNode.parentNode.id,
           'share_link_enabled': true
         }
       });
@@ -157,7 +172,7 @@
           'Authorization': 'Bearer ' + $accessToken.val()
         },
         data: {
-          'id': link.parentNode.id
+          'id': link.parentNode.parentNode.id
         }
       });
       request.done(function(data) {
@@ -177,21 +192,21 @@
     }
 
     function updateFilesList() {
-      $("#files").empty();
+      $("#files tbody").empty();
       $.each(files, function (key, file) {
-        var $dom = $('<li id="' + file.id + '" ></li>');
-        $dom.append($('<a class="btn btn-xs btn-danger" onclick="deleteFile(this)">Delete file</a>'));
+        var $dom = $('<tr id="' + file.id + '" ><td class="name"></td><td class="actions"></td></tr>');
+        $dom.find('.actions').append($('<a class="btn btn-xs btn-danger" onclick="deleteFile(this)">Delete file</a>'));
         if (file.share_link_enabled) {
-          $dom.append($('<a target="_blank" href="' + file.share_url +
+          $dom.find('.name').append($('<a target="_blank" href="' + file.share_url +
           '"> ' +
             file.name + ' - ' + file.share_url +
           '</a>'));
         } else {
-          $dom.append($('<a onclick="shareFile(this)">' +
+          $dom.find('.name').append($('<a onclick="shareFile(this)">' +
             file.name + ' - Click to share' +
           '</a>'));
         }
-        $("#files").append($dom);
+        $("#files tbody").append($dom);
       });
     }
 
