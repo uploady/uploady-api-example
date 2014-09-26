@@ -85,6 +85,7 @@
         var file = $file[0].files[0];
         data.append('file', file, file.name);
       }
+      data.append('share_link_enabled', true);
       $file.myResetElement();
       var request = $.ajax({
         type: "POST",
@@ -107,29 +108,6 @@
         alert("Request failed: " + textStatus);
         console.log(jqXHR);
         $("#log").val(jqXHR.responseText);
-      });
-    }
-
-    function shareFile(link) {
-      if (link.hasAttribute('href')) {
-        return ;
-      }
-      var request = $.ajax({
-        type: "PUT",
-        url: domain + '/v1/api/files',
-        headers: {
-          'Authorization': 'Bearer ' + $accessToken.val()
-        },
-        dataType: 'json',
-        data: {
-          'id': link.parentNode.parentNode.id,
-          'share_link_enabled': true
-        }
-      });
-      request.done(function(data) {
-        $("#log").val(JSON.stringify(data));
-        pushFile(data.files[0]);
-        updateFilesList();
       });
     }
 
@@ -196,16 +174,10 @@
       $.each(files, function (key, file) {
         var $dom = $('<tr id="' + file.id + '" ><td class="name"></td><td class="actions"></td></tr>');
         $dom.find('.actions').append($('<a class="btn btn-xs btn-danger" onclick="deleteFile(this)">Delete file</a>'));
-        if (file.share_link_enabled) {
-          $dom.find('.name').append($('<a target="_blank" href="' + file.share_url +
-          '"> ' +
-            file.name + ' - ' + file.share_url +
-          '</a>'));
-        } else {
-          $dom.find('.name').append($('<a onclick="shareFile(this)">' +
-            file.name + ' - Click to share' +
-          '</a>'));
-        }
+        $dom.find('.name').append($('<a target="_blank" href="' + file.share_url +
+        '"> ' +
+          file.name + ' - ' + file.share_url +
+        '</a>'));
         $("#files tbody").append($dom);
       });
     }

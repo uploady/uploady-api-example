@@ -3,23 +3,23 @@
 }
 #loading {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 50%;
+    left: 50%;
+    width: 84px;
+    height: 84px;
+    margin: -42px 0 0 -42px;
     z-index: 1000;
     background: #2980b9;
-}
-#loading.fade-out {
-    opacity: 0;
+    border-radius: 42px;
+    opacity: 0.9;
 }
 .spinner {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -16px 0 0 -16px;
-    width: 32px;
-    height: 32px;
+    margin: -26px 0 0 -26px;
+    width: 52px;
+    height: 52px;
 }
 .cube1, .cube2 {
     background-color: #fff;
